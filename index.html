@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة إعدادات MikroTik PCQ المتقدمة</title>
+    <title>حاسبة MikroTik PCQ المتقدمة</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
@@ -178,7 +178,6 @@
             margin-top: 10px;
             border-radius: 8px;
         }
-        /* Styling for the specific info texts */
         .info-text.orange-background {
             background-color: var(--orange-light);
             color: var(--black-text);
@@ -312,7 +311,7 @@
             
             if (!isNaN(rate) && !isNaN(percentage) && rate > 0) {
                 const calculatedBurstRate = rate * (1 + (percentage / 100));
-                burstRateInput.value = calculatedBurstRate.toFixed(1);
+                burstRateInput.value = Math.round(calculatedBurstRate); // Round to nearest whole number
             }
             calculateQueueSize();
             calculateBurst();
@@ -354,8 +353,8 @@
 
             const burstThreshold = ((burstRate * desiredDuration) + (rate * (recommendedBurstTime - desiredDuration))) / recommendedBurstTime;
             
-            const brText = `${burstRate.toFixed(1)} Mbps`;
-            const bthText = `${burstThreshold.toFixed(1)} Mbps`;
+            const brText = `${Math.round(burstRate)} Mbps`; // Round to nearest whole number
+            const bthText = `${Math.round(burstThreshold)} Mbps`; // Round to nearest whole number
             const btSeconds = recommendedBurstTime;
             const btText = `00:00:${btSeconds.toString().padStart(2, '0')}`;
 
